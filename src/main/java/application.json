@@ -1,0 +1,4 @@
+{
+	"jdbc_driver": "org.apache.ignite.IgniteJdbcThinDriver",
+	"jdbc_url": "jdbc:ignite:thin://47.104.109.229/public"
+}

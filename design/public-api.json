@@ -1,0 +1,443 @@
+{
+	"apiDefinitions": [
+		{
+			"comment": "系统 - 注册",
+			"javaClassName": "System_Register_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "手机号",
+						"example": "example",
+						"javaType": "String",
+						"name": "phone",
+						"required": true
+					},
+					{
+						"comment": "昵称",
+						"example": "example",
+						"javaType": "String",
+						"name": "nickname",
+						"required": true
+					},
+					{
+						"comment": "验证码",
+						"example": "example",
+						"javaType": "String",
+						"name": "verificationCode",
+						"required": true
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "个人资料详情",
+						"example": "example",
+						"javaType": "User",
+						"name": "data",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "系统 - 登录",
+			"javaClassName": "System_Login_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "手机号",
+						"example": "example",
+						"javaType": "String",
+						"name": "phone",
+						"required": true
+					},
+					{
+						"comment": "验证码",
+						"example": "example",
+						"javaType": "String",
+						"name": "verificationCode",
+						"required": true
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "个人资料详情",
+						"example": "example",
+						"javaType": "User",
+						"name": "data",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "系统 - 退出",
+			"javaClassName": "System_Logout_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "系统 - 检查Token是否有效",
+			"javaClassName": "System_IsValidToken_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "是否有效(0否1是)",
+						"example": "example",
+						"javaType": "Integer",
+						"name": "data",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "系统 - 修改我的密码",
+			"javaClassName": "System_UpdateMyPassword_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					},
+					{
+						"comment": "旧的登录密码",
+						"example": "example",
+						"javaType": "String",
+						"name": "oldLoginPassword",
+						"primaryKey": 0,
+						"required": true
+					},
+					{
+						"comment": "新的登录密码",
+						"example": "example",
+						"javaType": "String",
+						"name": "newLoginPassword",
+						"primaryKey": 0,
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "商品类别 - 查询全部",
+			"javaClassName": "GoodsCategory_QueryAll_Api",
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "商品类别列表(全部)",
+						"example": "example",
+						"javaType": "java.util.List<GoodsCategory>",
+						"name": "data",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "商品 - 查询列表",
+			"javaClassName": "Goods_QueryList_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "页码(从0开始)",
+						"example": "example",
+						"javaType": "Integer",
+						"name": "pageIndex",
+						"required": true
+					},
+					{
+						"comment": "页大小",
+						"example": "example",
+						"javaType": "Integer",
+						"name": "pageSize",
+						"required": true
+					},
+					{
+						"comment": "商品类别ID",
+						"example": "example",
+						"javaType": "String",
+						"name": "categoryId",
+						"required": false
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "商品列表",
+						"example": "example",
+						"javaType": "java.util.List<Goods>",
+						"name": "data",
+						"required": true
+					},
+					{
+						"comment": "分页",
+						"example": "example",
+						"javaType": "com.github.microprograms.micro_oss_core.model.dml.PagerResponse",
+						"name": "pager",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "商品 - 查询详情",
+			"javaClassName": "Goods_QueryDetail_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "商品ID",
+						"example": "example",
+						"javaType": "String",
+						"name": "goodsId",
+						"required": true
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "商品详情",
+						"example": "example",
+						"javaType": "Goods",
+						"name": "data",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "商品订单 - 查询我的订单列表",
+			"javaClassName": "MixOrder_QueryList_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					},
+					{
+						"comment": "页码(从0开始)",
+						"example": "example",
+						"javaType": "Integer",
+						"name": "pageIndex",
+						"required": true
+					},
+					{
+						"comment": "页大小",
+						"example": "example",
+						"javaType": "Integer",
+						"name": "pageSize",
+						"required": true
+					},
+					{
+						"comment": "状态(0全部,1未处理,2已处理,3退款审核中,4已退款,5已拒绝退款)",
+						"example": "example",
+						"javaType": "Integer",
+						"name": "status",
+						"required": true
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "商品订单列表",
+						"example": "example",
+						"javaType": "java.util.List<MixOrder>",
+						"name": "data",
+						"required": true
+					},
+					{
+						"comment": "分页",
+						"example": "example",
+						"javaType": "com.github.microprograms.micro_oss_core.model.dml.PagerResponse",
+						"name": "pager",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "商品订单 - 查询详情",
+			"javaClassName": "MixOrder_QueryDetail_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					},
+					{
+						"comment": "商品订单ID",
+						"example": "example",
+						"javaType": "String",
+						"name": "orderId",
+						"primaryKey": 0,
+						"required": true
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "商品订单详情",
+						"example": "example",
+						"javaType": "MixOrder",
+						"name": "data",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "我的 - 查询我的详情",
+			"javaClassName": "My_QueryMyDetail_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "用户详情",
+						"example": "example",
+						"javaType": "User",
+						"name": "data",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "我的 - 充值",
+			"javaClassName": "My_Recharge_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					},
+					{
+						"comment": "原始密码序列编码串",
+						"example": "example",
+						"javaType": "String",
+						"name": "rawPasswordSeriesCode",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		}
+	],
+	"comment": "yy-vip-center-site-api",
+	"deployDefinition": {
+		"localMavenProjectHome": "/Users/xuzewei/microprograms/yy-vip-center-site-api",
+		"localSshPassword": "xzw",
+		"localSshPort": 22,
+		"localSshUser": "xuzewei",
+		"remoteJavaApplicationHome": "/opt/microprograms/yy-vip-center-site-api",
+		"remoteSshPassword": "Xuzewei2017",
+		"remoteSshPort": 22,
+		"remoteSshUser": "root"
+	},
+	"description": "小提示：利用浏览器搜索功能Ctrl+F可快速定位API接口。每个接口都已定义快速跳转书签，点击超链接即可跳转。",
+	"errorCodeDefinitions": [
+		{
+			"code": 1010,
+			"message": "Token已失效，请重新登录",
+			"name": "invalid_token"
+		},
+		{
+			"code": 1011,
+			"message": "没有字段需要更新，请填写需要更新的字段",
+			"name": "no_fields_need_to_be_updated"
+		},
+		{
+			"code": 1012,
+			"message": "手机号未注册",
+			"name": "phone_unregistered"
+		},
+		{
+			"code": 1013,
+			"message": "手机号已被注册",
+			"name": "phone_already_registered"
+		},
+		{
+			"code": 1014,
+			"message": "验证码错误",
+			"name": "invalid_verification_code"
+		}
+	],
+	"javaPackageName": "com.github.microprograms.yy_vip_center_site_api.public_api",
+	"mixinDefinitions": [
+		{
+			"source": "/Users/xuzewei/microprograms/yy-vip-center-manager-api/design/model.json#entityDefinitions",
+			"target": "modelDefinitions"
+		}
+	],
+	"modelDefinitions": [],
+	"serverAddressDefinition": {
+		"host": "47.104.17.187",
+		"port": 8086,
+		"url": "/yy-vip-center-site-api"
+	},
+	"showdocDefinition": {
+		"apiKey": "3943cd4d4c8707ac37659ffb0511cf25917235770",
+		"apiToken": "6605a1cc72525cf8bdc21b2785db02fd899924958",
+		"url": "https://www.showdoc.cc/server/api/item/updateByApi"
+	},
+	"version": "v0.0.3"
+}
