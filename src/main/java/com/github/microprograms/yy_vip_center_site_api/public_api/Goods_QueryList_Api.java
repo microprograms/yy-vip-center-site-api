@@ -14,12 +14,13 @@ import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.micro_oss_core.model.dml.PagerRequest;
 import com.github.microprograms.micro_oss_core.model.dml.PagerResponse;
 import com.github.microprograms.micro_oss_core.model.dml.Sort;
+import com.github.microprograms.micro_oss_core.model.dml.Where;
 
 @MicroApi(comment = "商品 - 查询列表", type = "read", version = "v0.0.3")
 public class Goods_QueryList_Api {
 
     private static Condition buildFinalCondition(Req req) {
-        return Condition.build("isSoldOut=", 0);
+        return Where.and(Condition.build("isSoldOut=", 0), Condition.build("categoryId=", req.getCategoryId()));
     }
 
     private static List<Sort> buildSort(Req req) {
