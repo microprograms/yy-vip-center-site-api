@@ -2,7 +2,6 @@ package com.github.microprograms.yy_vip_center_site_api.public_api;
 
 import java.util.Arrays;
 import java.util.List;
-
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.model.Request;
 import com.github.microprograms.micro_api_runtime.model.Response;
@@ -46,7 +45,9 @@ public class Goods_QueryList_Api {
 
     public static class Req extends Request {
 
-        @Comment(value = "页码(从0开始)") @Required(value = true) private Integer pageIndex;
+        @Comment(value = "页码(从0开始)")
+        @Required(value = true)
+        private Integer pageIndex;
 
         public Integer getPageIndex() {
             return pageIndex;
@@ -56,7 +57,9 @@ public class Goods_QueryList_Api {
             this.pageIndex = pageIndex;
         }
 
-        @Comment(value = "页大小") @Required(value = true) private Integer pageSize;
+        @Comment(value = "页大小")
+        @Required(value = true)
+        private Integer pageSize;
 
         public Integer getPageSize() {
             return pageSize;
@@ -66,7 +69,9 @@ public class Goods_QueryList_Api {
             this.pageSize = pageSize;
         }
 
-        @Comment(value = "商品类别ID") @Required(value = false) private String categoryId;
+        @Comment(value = "商品类别ID")
+        @Required(value = false)
+        private String categoryId;
 
         public String getCategoryId() {
             return categoryId;
@@ -79,7 +84,9 @@ public class Goods_QueryList_Api {
 
     public static class Resp extends Response {
 
-        @Comment(value = "商品列表") @Required(value = true) private java.util.List<Goods> data;
+        @Comment(value = "商品列表")
+        @Required(value = true)
+        private java.util.List<Goods> data;
 
         public java.util.List<Goods> getData() {
             return data;
@@ -89,7 +96,9 @@ public class Goods_QueryList_Api {
             this.data = data;
         }
 
-        @Comment(value = "分页") @Required(value = true) private com.github.microprograms.micro_oss_core.model.dml.PagerResponse pager;
+        @Comment(value = "分页")
+        @Required(value = true)
+        private com.github.microprograms.micro_oss_core.model.dml.PagerResponse pager;
 
         public com.github.microprograms.micro_oss_core.model.dml.PagerResponse getPager() {
             return pager;
