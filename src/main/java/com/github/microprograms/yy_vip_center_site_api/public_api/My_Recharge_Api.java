@@ -2,6 +2,7 @@ package com.github.microprograms.yy_vip_center_site_api.public_api;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.exception.MicroApiPassthroughException;
@@ -45,6 +46,7 @@ public class My_Recharge_Api {
         MicroOss.updateObject(User.class, userFields, Condition.build("id=", user.getId()));
         // 钱包账单
         WalletBill walletBill = new WalletBill();
+        walletBill.setId(UUID.randomUUID().toString());
         walletBill.setUserId(user.getId());
         walletBill.setUserNickname(user.getNickname());
         // 类型(1入账,2消费)
@@ -70,9 +72,7 @@ public class My_Recharge_Api {
 
     public static class Req extends Request {
 
-        @Comment(value = "Token")
-        @Required(value = true)
-        private String token;
+        @Comment(value = "Token") @Required(value = true) private String token;
 
         public String getToken() {
             return token;
@@ -82,9 +82,7 @@ public class My_Recharge_Api {
             this.token = token;
         }
 
-        @Comment(value = "原始密码序列编码串")
-        @Required(value = true)
-        private String rawPasswordSeriesCode;
+        @Comment(value = "原始密码序列编码串") @Required(value = true) private String rawPasswordSeriesCode;
 
         public String getRawPasswordSeriesCode() {
             return rawPasswordSeriesCode;
