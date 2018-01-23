@@ -8,7 +8,7 @@ import com.github.microprograms.micro_nested_data_model_runtime.Comment;
 import com.github.microprograms.micro_nested_data_model_runtime.Required;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "我的 - 查询我的详情", type = "read", version = "v0.0.3")
+@MicroApi(comment = "我的 - 查询我的详情", type = "read", version = "v0.0.5")
 public class My_QueryMyDetail_Api {
 
     private static void core(Req req, Resp resp) throws Exception {
@@ -25,7 +25,9 @@ public class My_QueryMyDetail_Api {
 
     public static class Req extends Request {
 
-        @Comment(value = "Token") @Required(value = true) private String token;
+        @Comment(value = "Token")
+        @Required(value = true)
+        private String token;
 
         public String getToken() {
             return token;
@@ -38,7 +40,9 @@ public class My_QueryMyDetail_Api {
 
     public static class Resp extends Response {
 
-        @Comment(value = "用户详情") @Required(value = true) private User data;
+        @Comment(value = "用户详情")
+        @Required(value = true)
+        private User data;
 
         public User getData() {
             return data;

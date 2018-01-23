@@ -419,6 +419,16 @@
 			"code": 1014,
 			"message": "验证码错误",
 			"name": "invalid_verification_code"
+		},
+		{
+			"code": 1015,
+			"message": "无效的充值卡",
+			"name": "invalid_recharge_card"
+		},
+		{
+			"code": 1016,
+			"message": "充值卡已被使用",
+			"name": "recharge_card_already_used"
 		}
 	],
 	"javaPackageName": "com.github.microprograms.yy_vip_center_site_api.public_api",
@@ -439,5 +449,5 @@
 		"apiToken": "6605a1cc72525cf8bdc21b2785db02fd899924958",
 		"url": "https://www.showdoc.cc/server/api/item/updateByApi"
 	},
-	"version": "v0.0.3"
+	"version": "v0.0.5"
 }
