@@ -242,6 +242,29 @@
 			"type": "read"
 		},
 		{
+			"comment": "商品订单 - 购买",
+			"javaClassName": "MixOrder_Buy_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					},
+					{
+						"comment": "商品ID",
+						"example": "example",
+						"javaType": "String",
+						"name": "goodsId",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
 			"comment": "商品订单 - 查询我的订单列表",
 			"javaClassName": "MixOrder_QueryList_Api",
 			"requestDefinition": {
@@ -429,6 +452,21 @@
 			"code": 1016,
 			"message": "充值卡已被使用",
 			"name": "recharge_card_already_used"
+		},
+		{
+			"code": 1017,
+			"message": "商品已下架",
+			"name": "goods_not_exist"
+		},
+		{
+			"code": 1018,
+			"message": "库存不足",
+			"name": "low_stock"
+		},
+		{
+			"code": 1019,
+			"message": "余额不足",
+			"name": "low_wallet_amount"
 		}
 	],
 	"javaPackageName": "com.github.microprograms.yy_vip_center_site_api.public_api",
@@ -449,5 +487,5 @@
 		"apiToken": "6605a1cc72525cf8bdc21b2785db02fd899924958",
 		"url": "https://www.showdoc.cc/server/api/item/updateByApi"
 	},
-	"version": "v0.0.5"
+	"version": "v0.0.6"
 }

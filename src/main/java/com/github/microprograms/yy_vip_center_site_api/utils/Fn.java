@@ -15,11 +15,16 @@ import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.micro_oss_mysql.Config;
 import com.github.microprograms.micro_oss_mysql.MysqlMicroOssProvider;
+import com.github.microprograms.yy_vip_center_site_api.public_api.Goods;
 import com.github.microprograms.yy_vip_center_site_api.public_api.User;
 import com.typesafe.config.ConfigFactory;
 
 public class Fn {
     private static final Logger log = LoggerFactory.getLogger(Fn.class);
+
+    public static Goods queryGoodsById(String goodsId) throws MicroOssException {
+        return MicroOss.queryObject(Goods.class, Condition.build("id=", goodsId));
+    }
 
     public static User queryUserByToken(String token) throws MicroOssException {
         return MicroOss.queryObject(User.class, Condition.build("token=", token));

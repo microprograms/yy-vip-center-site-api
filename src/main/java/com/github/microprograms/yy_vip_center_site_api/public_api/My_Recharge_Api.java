@@ -3,7 +3,6 @@ package com.github.microprograms.yy_vip_center_site_api.public_api;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.exception.MicroApiPassthroughException;
 import com.github.microprograms.micro_api_runtime.model.Request;
@@ -16,7 +15,7 @@ import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "我的 - 充值", type = "read", version = "v0.0.5")
+@MicroApi(comment = "我的 - 充值", type = "read", version = "v0.0.6")
 public class My_Recharge_Api {
 
     private static void core(Req req, Response resp) throws Exception {
@@ -72,7 +71,9 @@ public class My_Recharge_Api {
 
     public static class Req extends Request {
 
-        @Comment(value = "Token") @Required(value = true) private String token;
+        @Comment(value = "Token")
+        @Required(value = true)
+        private String token;
 
         public String getToken() {
             return token;
@@ -82,7 +83,9 @@ public class My_Recharge_Api {
             this.token = token;
         }
 
-        @Comment(value = "原始密码序列编码串") @Required(value = true) private String rawPasswordSeriesCode;
+        @Comment(value = "原始密码序列编码串")
+        @Required(value = true)
+        private String rawPasswordSeriesCode;
 
         public String getRawPasswordSeriesCode() {
             return rawPasswordSeriesCode;

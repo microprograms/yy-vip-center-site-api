@@ -15,7 +15,7 @@ import com.github.microprograms.micro_oss_core.model.dml.PagerResponse;
 import com.github.microprograms.micro_oss_core.model.dml.Sort;
 import com.github.microprograms.micro_oss_core.model.dml.Where;
 
-@MicroApi(comment = "商品 - 查询列表", type = "read", version = "v0.0.5")
+@MicroApi(comment = "商品 - 查询列表", type = "read", version = "v0.0.6")
 public class Goods_QueryList_Api {
 
     private static Condition buildFinalCondition(Req req) {

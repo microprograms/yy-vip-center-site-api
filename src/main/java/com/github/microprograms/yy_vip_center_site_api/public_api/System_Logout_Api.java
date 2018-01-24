@@ -15,7 +15,7 @@ import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "系统 - 退出", type = "read", version = "v0.0.5")
+@MicroApi(comment = "系统 - 退出", type = "read", version = "v0.0.6")
 public class System_Logout_Api {
 
     private static void core(Req req, Response resp) throws Exception {
