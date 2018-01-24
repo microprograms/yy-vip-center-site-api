@@ -1,7 +1,5 @@
 package com.github.microprograms.yy_vip_center_site_api.public_api;
 
-import java.util.UUID;
-
 import com.alibaba.fastjson.JSON;
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.exception.MicroApiPassthroughException;
@@ -29,7 +27,7 @@ public class MixOrder_Buy_Api {
             throw new MicroApiPassthroughException(ErrorCodeEnum.low_stock);
         }
         MixOrder mixOrder = new MixOrder();
-        mixOrder.setId(UUID.randomUUID().toString());
+        mixOrder.setId(Fn.genNewMixOrderId());
         mixOrder.setUserId(user.getId());
         mixOrder.setUserNickname(user.getNickname());
         mixOrder.setOrderAmount(goods.getPrice());

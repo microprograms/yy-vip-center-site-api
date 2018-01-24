@@ -1,7 +1,9 @@
 package com.github.microprograms.yy_vip_center_site_api.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +23,12 @@ import com.typesafe.config.ConfigFactory;
 
 public class Fn {
     private static final Logger log = LoggerFactory.getLogger(Fn.class);
+
+    public static synchronized String genNewMixOrderId() throws InterruptedException {
+        Thread.sleep(1);
+        Date date = new Date();
+        return new SimpleDateFormat("yyyyMMddHHmmss").format(date) + date.getTime();
+    }
 
     public static Goods queryGoodsById(String goodsId) throws MicroOssException {
         return MicroOss.queryObject(Goods.class, Condition.build("id=", goodsId));
