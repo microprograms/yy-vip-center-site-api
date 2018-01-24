@@ -2,7 +2,6 @@ package com.github.microprograms.yy_vip_center_site_api.public_api;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.exception.MicroApiPassthroughException;
 import com.github.microprograms.micro_api_runtime.model.Request;
@@ -15,7 +14,7 @@ import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "商品订单 - 申请退货", type = "read", version = "v0.0.8")
+@MicroApi(comment = "商品订单 - 申请退货", type = "read", version = "v0.0.9")
 public class MixOrder_RefundRequest_Api {
 
     private static Condition buildFinalCondition(Req req) {
@@ -52,7 +51,9 @@ public class MixOrder_RefundRequest_Api {
 
     public static class Req extends Request {
 
-        @Comment(value = "Token") @Required(value = true) private String token;
+        @Comment(value = "Token")
+        @Required(value = true)
+        private String token;
 
         public String getToken() {
             return token;
@@ -62,7 +63,9 @@ public class MixOrder_RefundRequest_Api {
             this.token = token;
         }
 
-        @Comment(value = "商品订单ID") @Required(value = true) private String orderId;
+        @Comment(value = "商品订单ID")
+        @Required(value = true)
+        private String orderId;
 
         public String getOrderId() {
             return orderId;
@@ -72,7 +75,9 @@ public class MixOrder_RefundRequest_Api {
             this.orderId = orderId;
         }
 
-        @Comment(value = "退货申请 - 备注") @Required(value = false) private String refundRequestComment;
+        @Comment(value = "退货申请 - 备注")
+        @Required(value = false)
+        private String refundRequestComment;
 
         public String getRefundRequestComment() {
             return refundRequestComment;

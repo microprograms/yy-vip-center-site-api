@@ -11,7 +11,7 @@ import com.github.microprograms.micro_nested_data_model_runtime.Required;
 import com.github.microprograms.micro_oss_core.MicroOss;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "系统 - 注册", type = "read", version = "v0.0.8")
+@MicroApi(comment = "系统 - 注册", type = "read", version = "v0.0.9")
 public class System_Register_Api {
 
     private static User buildUser(Req req) {

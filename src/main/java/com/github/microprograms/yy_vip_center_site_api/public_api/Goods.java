@@ -4,7 +4,7 @@ import com.github.microprograms.micro_relational_data_model_runtime.MicroRelatio
 import com.github.microprograms.micro_relational_data_model_runtime.Comment;
 import com.github.microprograms.micro_relational_data_model_runtime.Required;
 
-@MicroRelationalDataModel(version = "v0.0.8")
+@MicroRelationalDataModel(version = "v0.0.9")
 public class Goods {
 
     @Comment(value = "商品ID")

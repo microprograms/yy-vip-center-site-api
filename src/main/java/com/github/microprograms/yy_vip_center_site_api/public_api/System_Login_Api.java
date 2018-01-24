@@ -9,7 +9,7 @@ import com.github.microprograms.micro_nested_data_model_runtime.Comment;
 import com.github.microprograms.micro_nested_data_model_runtime.Required;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "系统 - 登录", type = "read", version = "v0.0.8")
+@MicroApi(comment = "系统 - 登录", type = "read", version = "v0.0.9")
 public class System_Login_Api {
 
     private static void core(Req req, Resp resp) throws Exception {

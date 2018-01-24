@@ -294,7 +294,7 @@
 						"comment": "状态(0全部,1未处理,2已处理,3退款审核中,4已退款,5已拒绝退款)",
 						"example": "example",
 						"javaType": "Integer",
-						"name": "status",
+						"name": "searchStatus",
 						"required": true
 					}
 				]
@@ -519,5 +519,5 @@
 		"apiToken": "6605a1cc72525cf8bdc21b2785db02fd899924958",
 		"url": "https://www.showdoc.cc/server/api/item/updateByApi"
 	},
-	"version": "v0.0.8"
+	"version": "v0.0.9"
 }

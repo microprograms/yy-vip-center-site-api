@@ -16,7 +16,7 @@ import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "商品订单 - 购买", type = "read", version = "v0.0.8")
+@MicroApi(comment = "商品订单 - 购买", type = "read", version = "v0.0.9")
 public class MixOrder_Buy_Api {
 
     private static void core(Req req, Response resp) throws Exception {
