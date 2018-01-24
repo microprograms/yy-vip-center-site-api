@@ -15,7 +15,7 @@ import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "我的 - 充值", type = "read", version = "v0.0.6")
+@MicroApi(comment = "我的 - 充值", type = "read", version = "v0.0.8")
 public class My_Recharge_Api {
 
     private static void core(Req req, Response resp) throws Exception {

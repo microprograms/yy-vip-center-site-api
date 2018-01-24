@@ -15,7 +15,7 @@ import com.github.microprograms.micro_oss_core.model.dml.PagerResponse;
 import com.github.microprograms.micro_oss_core.model.dml.Sort;
 import com.github.microprograms.micro_oss_core.model.dml.Where;
 
-@MicroApi(comment = "商品 - 查询列表", type = "read", version = "v0.0.6")
+@MicroApi(comment = "商品 - 查询列表", type = "read", version = "v0.0.8")
 public class Goods_QueryList_Api {
 
     private static Condition buildFinalCondition(Req req) {
@@ -38,6 +38,7 @@ public class Goods_QueryList_Api {
         Req req = (Req) request;
         MicroApiUtils.throwExceptionIfBlank(req.getPageIndex(), "pageIndex");
         MicroApiUtils.throwExceptionIfBlank(req.getPageSize(), "pageSize");
+        MicroApiUtils.throwExceptionIfBlank(req.getCategoryId(), "categoryId");
         Resp resp = new Resp();
         core(req, resp);
         return resp;
@@ -70,7 +71,7 @@ public class Goods_QueryList_Api {
         }
 
         @Comment(value = "商品类别ID")
-        @Required(value = false)
+        @Required(value = true)
         private String categoryId;
 
         public String getCategoryId() {

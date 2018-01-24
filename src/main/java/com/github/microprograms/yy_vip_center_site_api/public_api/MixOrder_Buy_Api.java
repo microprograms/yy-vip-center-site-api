@@ -3,7 +3,6 @@ package com.github.microprograms.yy_vip_center_site_api.public_api;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import com.alibaba.fastjson.JSON;
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.exception.MicroApiPassthroughException;
@@ -17,7 +16,7 @@ import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "商品订单 - 购买", type = "read", version = "v0.0.6")
+@MicroApi(comment = "商品订单 - 购买", type = "read", version = "v0.0.8")
 public class MixOrder_Buy_Api {
 
     private static void core(Req req, Response resp) throws Exception {
@@ -83,7 +82,9 @@ public class MixOrder_Buy_Api {
 
     public static class Req extends Request {
 
-        @Comment(value = "Token") @Required(value = true) private String token;
+        @Comment(value = "Token")
+        @Required(value = true)
+        private String token;
 
         public String getToken() {
             return token;
@@ -93,7 +94,9 @@ public class MixOrder_Buy_Api {
             this.token = token;
         }
 
-        @Comment(value = "商品ID") @Required(value = true) private String goodsId;
+        @Comment(value = "商品ID")
+        @Required(value = true)
+        private String goodsId;
 
         public String getGoodsId() {
             return goodsId;

@@ -4,7 +4,7 @@ import com.github.microprograms.micro_relational_data_model_runtime.MicroRelatio
 import com.github.microprograms.micro_relational_data_model_runtime.Comment;
 import com.github.microprograms.micro_relational_data_model_runtime.Required;
 
-@MicroRelationalDataModel(version = "v0.0.6")
+@MicroRelationalDataModel(version = "v0.0.8")
 public class MixOrder {
 
     @Comment(value = "订单号")
@@ -44,7 +44,7 @@ public class MixOrder {
     }
 
     @Comment(value = "订单总金额(分)")
-    @Required(value = false)
+    @Required(value = true)
     private Integer orderAmount = 0;
 
     public Integer getOrderAmount() {
@@ -56,7 +56,7 @@ public class MixOrder {
     }
 
     @Comment(value = "商品 - ID")
-    @Required(value = false)
+    @Required(value = true)
     private String goodsId = "";
 
     public String getGoodsId() {
@@ -80,7 +80,7 @@ public class MixOrder {
     }
 
     @Comment(value = "商品 - 明细(JsonObject)")
-    @Required(value = false)
+    @Required(value = true)
     private String goodsDetail = "";
 
     public String getGoodsDetail() {
@@ -92,7 +92,7 @@ public class MixOrder {
     }
 
     @Comment(value = "订单备注(JsonObject)")
-    @Required(value = false)
+    @Required(value = true)
     private String comment = "";
 
     public String getComment() {
@@ -164,7 +164,7 @@ public class MixOrder {
     }
 
     @Comment(value = "退货申请 - 备注")
-    @Required(value = false)
+    @Required(value = true)
     private String refundRequestComment = "";
 
     public String getRefundRequestComment() {

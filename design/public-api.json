@@ -190,7 +190,7 @@
 						"example": "example",
 						"javaType": "String",
 						"name": "categoryId",
-						"required": false
+						"required": true
 					}
 				]
 			},
@@ -355,6 +355,38 @@
 			"type": "read"
 		},
 		{
+			"comment": "商品订单 - 申请退货",
+			"javaClassName": "MixOrder_RefundRequest_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					},
+					{
+						"comment": "商品订单ID",
+						"example": "example",
+						"javaType": "String",
+						"name": "orderId",
+						"primaryKey": 0,
+						"required": true
+					},
+					{
+						"comment": "退货申请 - 备注",
+						"example": "example",
+						"javaType": "String",
+						"name": "refundRequestComment",
+						"primaryKey": 0,
+						"required": false
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
 			"comment": "我的 - 查询我的详情",
 			"javaClassName": "My_QueryMyDetail_Api",
 			"requestDefinition": {
@@ -487,5 +519,5 @@
 		"apiToken": "6605a1cc72525cf8bdc21b2785db02fd899924958",
 		"url": "https://www.showdoc.cc/server/api/item/updateByApi"
 	},
-	"version": "v0.0.6"
+	"version": "v0.0.8"
 }

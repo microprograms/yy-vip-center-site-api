@@ -15,7 +15,7 @@ import com.github.microprograms.micro_api_runtime.utils.MicroApiUtils;
 import com.github.microprograms.micro_nested_data_model_runtime.Comment;
 import com.github.microprograms.micro_nested_data_model_runtime.Required;
 
-@MicroApi(comment = "商品订单 - 查询我的订单列表", type = "read", version = "v0.0.6")
+@MicroApi(comment = "商品订单 - 查询我的订单列表", type = "read", version = "v0.0.8")
 public class MixOrder_QueryList_Api {
 
     private static Condition buildFinalCondition(Req req) {
