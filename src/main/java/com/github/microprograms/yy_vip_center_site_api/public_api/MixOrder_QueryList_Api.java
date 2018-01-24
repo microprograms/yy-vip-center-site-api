@@ -38,7 +38,7 @@ public class MixOrder_QueryList_Api {
         case 1:
             return Condition.build("isDispose=", 0);
         case 2:
-            return Condition.build("isDispose=", 1);
+            return Where.and(Condition.build("isDispose=", 1), Condition.build("refundRequestStatus=", 0));
         case 3:
             return Condition.build("refundRequestStatus=", 1);
         case 4:
