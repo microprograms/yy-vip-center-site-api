@@ -13,8 +13,8 @@ import com.github.microprograms.micro_oss_core.MicroOss;
 import com.github.microprograms.micro_oss_core.exception.MicroOssException;
 import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
-import com.github.microprograms.micro_oss_ignite.Config;
-import com.github.microprograms.micro_oss_ignite.IgniteMicroOssProvider;
+import com.github.microprograms.micro_oss_mysql.Config;
+import com.github.microprograms.micro_oss_mysql.MysqlMicroOssProvider;
 import com.github.microprograms.yy_vip_center_site_api.public_api.User;
 import com.typesafe.config.ConfigFactory;
 
@@ -34,8 +34,10 @@ public class Fn {
         Config config = new Config();
         config.setDriver(applicationConfig.getString("jdbc_driver"));
         config.setUrl(applicationConfig.getString("jdbc_url"));
+        config.setUser(applicationConfig.getString("jdbc_user"));
+        config.setPassword(applicationConfig.getString("jdbc_password"));
         log.info("initOss> {}", JSON.toJSONString(config));
-        MicroOss.set(new IgniteMicroOssProvider(config));
+        MicroOss.set(new MysqlMicroOssProvider(config));
     }
 
     public static com.typesafe.config.Config getApplicationConfig() {

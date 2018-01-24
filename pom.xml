@@ -76,7 +76,7 @@
         </dependency>
         <dependency>
             <groupId>com.github.microprograms</groupId>
-            <artifactId>micro-oss-ignite</artifactId>
+            <artifactId>micro-oss-mysql</artifactId>
             <version>1.2.2</version>
         </dependency>
         <dependency>

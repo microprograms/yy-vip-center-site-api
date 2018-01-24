@@ -1,4 +1,6 @@
 {
-	"jdbc_driver": "org.apache.ignite.IgniteJdbcThinDriver",
-	"jdbc_url": "jdbc:ignite:thin://47.104.109.229/public"
+	"jdbc_driver": "com.mysql.jdbc.Driver",
+	"jdbc_url": "jdbc:mysql://xzw1:3306/yy_vip_center?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=true",
+	"jdbc_user": "root",
+	"jdbc_password": "123456"
 }
