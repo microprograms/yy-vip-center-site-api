@@ -1,6 +1,6 @@
 {
 	"jdbc_driver": "com.mysql.jdbc.Driver",
-	"jdbc_url": "jdbc:mysql://xzw1:3306/yy_vip_center?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=true",
+	"jdbc_url": "jdbc:mysql://rm-2zej82442e6383k8x.mysql.rds.aliyuncs.com:3306/yy_vip_center?useUnicode=true&characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&useSSL=true",
 	"jdbc_user": "root",
 	"jdbc_password": "123456"
 }
