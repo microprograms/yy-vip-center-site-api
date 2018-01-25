@@ -235,6 +235,18 @@ public class Goods {
         this.soldOutOperatorLoginName = soldOutOperatorLoginName;
     }
 
+    @Comment(value = "备注模板(0基础模板,1第一套,2第二套,3第三套)")
+    @Required(value = true)
+    private Integer commentTemplate = 0;
+
+    public Integer getCommentTemplate() {
+        return commentTemplate;
+    }
+
+    public void setCommentTemplate(Integer commentTemplate) {
+        this.commentTemplate = commentTemplate;
+    }
+
     @Comment(value = "上次修改时间")
     @Required(value = true)
     private Long dtLastModify = 0L;

@@ -1,7 +1,6 @@
 package com.github.microprograms.yy_vip_center_site_api.public_api;
 
 import java.util.UUID;
-
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.exception.MicroApiPassthroughException;
 import com.github.microprograms.micro_api_runtime.model.Request;
@@ -51,7 +50,9 @@ public class System_Register_Api {
 
     public static class Req extends Request {
 
-        @Comment(value = "手机号") @Required(value = true) private String phone;
+        @Comment(value = "手机号")
+        @Required(value = true)
+        private String phone;
 
         public String getPhone() {
             return phone;
@@ -61,7 +62,9 @@ public class System_Register_Api {
             this.phone = phone;
         }
 
-        @Comment(value = "昵称") @Required(value = true) private String nickname;
+        @Comment(value = "昵称")
+        @Required(value = true)
+        private String nickname;
 
         public String getNickname() {
             return nickname;
@@ -71,7 +74,9 @@ public class System_Register_Api {
             this.nickname = nickname;
         }
 
-        @Comment(value = "验证码") @Required(value = true) private String verificationCode;
+        @Comment(value = "验证码")
+        @Required(value = true)
+        private String verificationCode;
 
         public String getVerificationCode() {
             return verificationCode;
@@ -84,7 +89,9 @@ public class System_Register_Api {
 
     public static class Resp extends Response {
 
-        @Comment(value = "个人资料详情") @Required(value = true) private User data;
+        @Comment(value = "个人资料详情")
+        @Required(value = true)
+        private User data;
 
         public User getData() {
             return data;
