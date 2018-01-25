@@ -13,7 +13,7 @@ import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 public class System_Login_Api {
 
     private static void core(Req req, Resp resp) throws Exception {
-        if (!"1234".equals(req.getVerificationCode())) {
+        if (!"658887".equals(req.getVerificationCode())) {
             throw new MicroApiPassthroughException(ErrorCodeEnum.invalid_verification_code);
         }
         User adminUser = Fn.queryUserByPhone(req.getPhone());
