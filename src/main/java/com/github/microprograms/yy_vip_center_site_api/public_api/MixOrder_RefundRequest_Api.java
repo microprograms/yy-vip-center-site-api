@@ -14,7 +14,7 @@ import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "商品订单 - 申请退货", type = "read", version = "v0.0.10")
+@MicroApi(comment = "商品订单 - 申请退货", type = "read", version = "v0.0.11")
 public class MixOrder_RefundRequest_Api {
 
     private static Condition buildFinalCondition(Req req) {

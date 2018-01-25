@@ -259,6 +259,13 @@
 						"javaType": "String",
 						"name": "goodsId",
 						"required": true
+					},
+					{
+						"comment": "订单备注(JsonObject)",
+						"example": "example",
+						"javaType": "String",
+						"name": "comment",
+						"required": true
 					}
 				]
 			},
@@ -524,5 +531,5 @@
 		"apiToken": "6605a1cc72525cf8bdc21b2785db02fd899924958",
 		"url": "https://www.showdoc.cc/server/api/item/updateByApi"
 	},
-	"version": "v0.0.10"
+	"version": "v0.0.11"
 }

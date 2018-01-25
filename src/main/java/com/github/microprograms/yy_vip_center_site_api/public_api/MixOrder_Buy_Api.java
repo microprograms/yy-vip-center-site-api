@@ -16,7 +16,7 @@ import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "商品订单 - 购买", type = "read", version = "v0.0.10")
+@MicroApi(comment = "商品订单 - 购买", type = "read", version = "v0.0.11")
 public class MixOrder_Buy_Api {
 
     private static void core(Req req, Response resp) throws Exception {
@@ -47,7 +47,7 @@ public class MixOrder_Buy_Api {
         mixOrder.setGoodsId(goods.getId());
         mixOrder.setGoodsName(goods.getName());
         mixOrder.setGoodsDetail(JSON.toJSONString(goods));
-        mixOrder.setComment(null);
+        mixOrder.setComment(req.getComment());
         mixOrder.setDtCreate(System.currentTimeMillis());
         MicroOss.insertObject(mixOrder);
         // 用户
@@ -75,6 +75,7 @@ public class MixOrder_Buy_Api {
         Req req = (Req) request;
         MicroApiUtils.throwExceptionIfBlank(req.getToken(), "token");
         MicroApiUtils.throwExceptionIfBlank(req.getGoodsId(), "goodsId");
+        MicroApiUtils.throwExceptionIfBlank(req.getComment(), "comment");
         Response resp = new Response();
         core(req, resp);
         return resp;
@@ -82,9 +83,7 @@ public class MixOrder_Buy_Api {
 
     public static class Req extends Request {
 
-        @Comment(value = "Token")
-        @Required(value = true)
-        private String token;
+        @Comment(value = "Token") @Required(value = true) private String token;
 
         public String getToken() {
             return token;
@@ -94,9 +93,7 @@ public class MixOrder_Buy_Api {
             this.token = token;
         }
 
-        @Comment(value = "商品ID")
-        @Required(value = true)
-        private String goodsId;
+        @Comment(value = "商品ID") @Required(value = true) private String goodsId;
 
         public String getGoodsId() {
             return goodsId;
@@ -104,6 +101,16 @@ public class MixOrder_Buy_Api {
 
         public void setGoodsId(String goodsId) {
             this.goodsId = goodsId;
+        }
+
+        @Comment(value = "订单备注(JsonObject)") @Required(value = true) private String comment;
+
+        public String getComment() {
+            return comment;
+        }
+
+        public void setComment(String comment) {
+            this.comment = comment;
         }
     }
 }
