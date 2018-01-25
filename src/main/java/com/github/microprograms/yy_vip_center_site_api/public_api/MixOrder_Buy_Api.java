@@ -3,6 +3,7 @@ package com.github.microprograms.yy_vip_center_site_api.public_api;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import com.alibaba.fastjson.JSON;
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.exception.MicroApiPassthroughException;
@@ -31,7 +32,7 @@ public class MixOrder_Buy_Api {
         if (goods.getStock() <= 0) {
             throw new MicroApiPassthroughException(ErrorCodeEnum.low_stock);
         }
-        int orderAmount = goods.getPrice();
+        int orderAmount = getOrderAmount(user, goods);
         int oldWalletAmount = user.getWalletAmount();
         int newWalletAmount = oldWalletAmount - orderAmount;
         if (newWalletAmount < 0) {
@@ -70,6 +71,21 @@ public class MixOrder_Buy_Api {
         walletBill.setOutOrderGoodsName(goods.getName());
         walletBill.setOutOrderId(mixOrderId);
         MicroOss.insertObject(walletBill);
+    }
+
+    private static int getOrderAmount(User user, Goods goods) {
+        switch (user.getLevel()) {
+        case 0:
+            return goods.getPrice();
+        case 1:
+            return goods.getPriceLevel1();
+        case 2:
+            return goods.getPriceLevel2();
+        case 3:
+            return goods.getPriceLevel3();
+        default:
+            return goods.getPrice();
+        }
     }
 
     public static Response execute(Request request) throws Exception {
