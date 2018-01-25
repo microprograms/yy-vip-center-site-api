@@ -499,6 +499,11 @@
 			"code": 1019,
 			"message": "余额不足",
 			"name": "low_wallet_amount"
+		},
+		{
+			"code": 1020,
+			"message": "昵称已被注册",
+			"name": "nickname_already_registered"
 		}
 	],
 	"javaPackageName": "com.github.microprograms.yy_vip_center_site_api.public_api",
@@ -519,5 +524,5 @@
 		"apiToken": "6605a1cc72525cf8bdc21b2785db02fd899924958",
 		"url": "https://www.showdoc.cc/server/api/item/updateByApi"
 	},
-	"version": "v0.0.9"
+	"version": "v0.0.10"
 }

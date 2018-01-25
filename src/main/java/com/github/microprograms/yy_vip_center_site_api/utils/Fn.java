@@ -42,6 +42,10 @@ public class Fn {
         return MicroOss.queryObject(User.class, Condition.build("phone=", phone));
     }
 
+    public static User queryUserByNickname(String nickname) throws MicroOssException {
+        return MicroOss.queryObject(User.class, Condition.build("nickname=", nickname));
+    }
+
     public static void initOss() {
         com.typesafe.config.Config applicationConfig = getApplicationConfig();
         Config config = new Config();
