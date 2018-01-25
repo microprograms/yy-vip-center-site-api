@@ -46,6 +46,7 @@ public class MixOrder_Buy_Api {
         mixOrder.setOrderAmount(orderAmount);
         mixOrder.setGoodsId(goods.getId());
         mixOrder.setGoodsName(goods.getName());
+        mixOrder.setGoodsCommentTemplate(goods.getCommentTemplate());
         mixOrder.setGoodsDetail(JSON.toJSONString(goods));
         mixOrder.setComment(req.getComment());
         mixOrder.setDtCreate(System.currentTimeMillis());
