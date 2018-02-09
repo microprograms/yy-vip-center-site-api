@@ -3,7 +3,6 @@ package com.github.microprograms.yy_vip_center_site_api.public_api;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-
 import com.alibaba.fastjson.JSON;
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.exception.MicroApiPassthroughException;
@@ -27,6 +26,9 @@ public class MixOrder_Buy_Api {
         }
         Goods goods = Fn.queryGoodsById(req.getGoodsId());
         if (goods == null) {
+            throw new MicroApiPassthroughException(ErrorCodeEnum.goods_not_exist);
+        }
+        if (goods.getIsSoldOut() == 1) {
             throw new MicroApiPassthroughException(ErrorCodeEnum.goods_not_exist);
         }
         if (goods.getStock() <= 0) {
@@ -74,17 +76,17 @@ public class MixOrder_Buy_Api {
     }
 
     private static int getOrderAmount(User user, Goods goods) {
-        switch (user.getLevel()) {
-        case 0:
-            return goods.getPrice();
-        case 1:
-            return goods.getPriceLevel1();
-        case 2:
-            return goods.getPriceLevel2();
-        case 3:
-            return goods.getPriceLevel3();
-        default:
-            return goods.getPrice();
+        switch(user.getLevel()) {
+            case 0:
+                return goods.getPrice();
+            case 1:
+                return goods.getPriceLevel1();
+            case 2:
+                return goods.getPriceLevel2();
+            case 3:
+                return goods.getPriceLevel3();
+            default:
+                return goods.getPrice();
         }
     }
 
@@ -100,7 +102,9 @@ public class MixOrder_Buy_Api {
 
     public static class Req extends Request {
 
-        @Comment(value = "Token") @Required(value = true) private String token;
+        @Comment(value = "Token")
+        @Required(value = true)
+        private String token;
 
         public String getToken() {
             return token;
@@ -110,7 +114,9 @@ public class MixOrder_Buy_Api {
             this.token = token;
         }
 
-        @Comment(value = "商品ID") @Required(value = true) private String goodsId;
+        @Comment(value = "商品ID")
+        @Required(value = true)
+        private String goodsId;
 
         public String getGoodsId() {
             return goodsId;
@@ -120,7 +126,9 @@ public class MixOrder_Buy_Api {
             this.goodsId = goodsId;
         }
 
-        @Comment(value = "订单备注(JsonObject)") @Required(value = true) private String comment;
+        @Comment(value = "订单备注(JsonObject)")
+        @Required(value = true)
+        private String comment;
 
         public String getComment() {
             return comment;

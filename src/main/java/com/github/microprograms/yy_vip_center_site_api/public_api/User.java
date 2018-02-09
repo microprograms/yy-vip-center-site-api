@@ -79,6 +79,18 @@ public class User {
         this.level = level;
     }
 
+    @Comment(value = "是否禁用(0否1是)")
+    @Required(value = true)
+    private Integer isDisable = 0;
+
+    public Integer getIsDisable() {
+        return isDisable;
+    }
+
+    public void setIsDisable(Integer isDisable) {
+        this.isDisable = isDisable;
+    }
+
     @Comment(value = "注册时间")
     @Required(value = true)
     private Long dtCreate = 0L;

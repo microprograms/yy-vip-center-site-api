@@ -516,7 +516,7 @@
 	"javaPackageName": "com.github.microprograms.yy_vip_center_site_api.public_api",
 	"mixinDefinitions": [
 		{
-			"source": "/Users/xuzewei/microprograms/yy-vip-center-manager-api/design/model.json#entityDefinitions",
+			"source": "/Users/xuzewei/microprograms/yy-vip-center-manager-api/src/main/java/model.json#entityDefinitions",
 			"target": "modelDefinitions"
 		}
 	],
