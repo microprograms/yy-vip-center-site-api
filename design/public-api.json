@@ -511,6 +511,11 @@
 			"code": 1020,
 			"message": "昵称已被注册",
 			"name": "nickname_already_registered"
+		},
+		{
+			"code": 1021,
+			"message": "账号已被禁用",
+			"name": "account_already_disable"
 		}
 	],
 	"javaPackageName": "com.github.microprograms.yy_vip_center_site_api.public_api",
@@ -531,5 +536,5 @@
 		"apiToken": "6605a1cc72525cf8bdc21b2785db02fd899924958",
 		"url": "https://www.showdoc.cc/server/api/item/updateByApi"
 	},
-	"version": "v0.0.11"
+	"version": "v0.0.12"
 }

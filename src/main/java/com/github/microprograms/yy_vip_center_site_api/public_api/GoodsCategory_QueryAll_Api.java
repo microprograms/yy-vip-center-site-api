@@ -11,7 +11,7 @@ import com.github.microprograms.micro_oss_core.MicroOss;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.micro_oss_core.model.dml.Sort;
 
-@MicroApi(comment = "商品类别 - 查询全部", type = "read", version = "v0.0.11")
+@MicroApi(comment = "商品类别 - 查询全部", type = "read", version = "v0.0.12")
 public class GoodsCategory_QueryAll_Api {
 
     private static Condition buildFinalCondition(Request req) {

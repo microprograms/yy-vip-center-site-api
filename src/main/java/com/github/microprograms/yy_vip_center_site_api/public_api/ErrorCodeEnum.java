@@ -15,7 +15,8 @@ public enum ErrorCodeEnum implements ResponseCode {
     goods_not_exist(1017, "商品已下架"), /**库存不足*/
     low_stock(1018, "库存不足"), /**余额不足*/
     low_wallet_amount(1019, "余额不足"), /**昵称已被注册*/
-    nickname_already_registered(1020, "昵称已被注册");
+    nickname_already_registered(1020, "昵称已被注册"), /**账号已被禁用*/
+    account_already_disable(1021, "账号已被禁用");
 
     private ErrorCodeEnum(int code, String message) {
         this.code = code;

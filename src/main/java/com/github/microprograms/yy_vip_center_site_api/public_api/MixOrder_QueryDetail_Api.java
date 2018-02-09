@@ -9,7 +9,7 @@ import com.github.microprograms.micro_api_runtime.utils.MicroApiUtils;
 import com.github.microprograms.micro_nested_data_model_runtime.Comment;
 import com.github.microprograms.micro_nested_data_model_runtime.Required;
 
-@MicroApi(comment = "商品订单 - 查询详情", type = "read", version = "v0.0.11")
+@MicroApi(comment = "商品订单 - 查询详情", type = "read", version = "v0.0.12")
 public class MixOrder_QueryDetail_Api {
 
     private static Condition buildFinalCondition(Req req) {

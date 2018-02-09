@@ -35,7 +35,14 @@ public class Fn {
     }
 
     public static User queryUserByToken(String token) throws MicroOssException {
-        return MicroOss.queryObject(User.class, Condition.build("token=", token));
+        User user = MicroOss.queryObject(User.class, Condition.build("token=", token));
+        if (user == null) {
+            return null;
+        }
+        if (user.getIsDisable() == 1) {
+            return null;
+        }
+        return user;
     }
 
     public static User queryUserByPhone(String phone) throws MicroOssException {

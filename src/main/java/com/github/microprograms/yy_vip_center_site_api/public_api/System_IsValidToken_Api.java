@@ -9,7 +9,7 @@ import com.github.microprograms.micro_api_runtime.utils.MicroApiUtils;
 import com.github.microprograms.micro_nested_data_model_runtime.Comment;
 import com.github.microprograms.micro_nested_data_model_runtime.Required;
 
-@MicroApi(comment = "系统 - 检查Token是否有效", type = "read", version = "v0.0.11")
+@MicroApi(comment = "系统 - 检查Token是否有效", type = "read", version = "v0.0.12")
 public class System_IsValidToken_Api {
 
     private static void core(Req req, Resp resp) throws Exception {
