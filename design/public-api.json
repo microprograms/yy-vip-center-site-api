@@ -42,6 +42,22 @@
 			"type": "read"
 		},
 		{
+			"comment": "系统 - 发送短信验证码",
+			"javaClassName": "System_SendVerificationCode_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "手机号",
+						"example": "example",
+						"javaType": "String",
+						"name": "phone",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
 			"comment": "系统 - 登录",
 			"javaClassName": "System_Login_Api",
 			"requestDefinition": {
@@ -516,6 +532,16 @@
 			"code": 1021,
 			"message": "账号已被禁用",
 			"name": "account_already_disable"
+		},
+		{
+			"code": 1022,
+			"message": "短信发送失败",
+			"name": "sms_send_fail"
+		},
+		{
+			"code": 1023,
+			"message": "验证码已失效, 请重新发送",
+			"name": "verification_code_not_exist"
 		}
 	],
 	"javaPackageName": "com.github.microprograms.yy_vip_center_site_api.public_api",
@@ -536,5 +562,5 @@
 		"apiToken": "6605a1cc72525cf8bdc21b2785db02fd899924958",
 		"url": "https://www.showdoc.cc/server/api/item/updateByApi"
 	},
-	"version": "v0.0.12"
+	"version": "v0.0.15"
 }

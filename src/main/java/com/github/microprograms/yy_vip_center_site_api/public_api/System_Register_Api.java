@@ -10,8 +10,9 @@ import com.github.microprograms.micro_nested_data_model_runtime.Comment;
 import com.github.microprograms.micro_nested_data_model_runtime.Required;
 import com.github.microprograms.micro_oss_core.MicroOss;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
+import com.github.microprograms.yy_vip_center_site_api.utils.VerificationCodeUtils;
 
-@MicroApi(comment = "系统 - 注册", type = "read", version = "v0.0.12")
+@MicroApi(comment = "系统 - 注册", type = "read", version = "v0.0.15")
 public class System_Register_Api {
 
     private static User buildUser(Req req) {
@@ -25,7 +26,7 @@ public class System_Register_Api {
     }
 
     private static void core(Req req, Resp resp) throws Exception {
-        if (!"658887".equals(req.getVerificationCode())) {
+        if (!VerificationCodeUtils.isValid(req.getPhone(), req.getVerificationCode())) {
             throw new MicroApiPassthroughException(ErrorCodeEnum.invalid_verification_code);
         }
         if (Fn.queryUserByPhone(req.getPhone()) != null) {
