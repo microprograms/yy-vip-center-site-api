@@ -3,6 +3,7 @@ package com.github.microprograms.yy_vip_center_site_api.public_api;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+
 import com.alibaba.fastjson.JSON;
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.exception.MicroApiPassthroughException;
@@ -12,12 +13,23 @@ import com.github.microprograms.micro_api_runtime.utils.MicroApiUtils;
 import com.github.microprograms.micro_nested_data_model_runtime.Comment;
 import com.github.microprograms.micro_nested_data_model_runtime.Required;
 import com.github.microprograms.micro_oss_core.MicroOss;
+import com.github.microprograms.micro_oss_core.exception.MicroOssException;
 import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
+import com.github.microprograms.micro_oss_core.model.dml.Where;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
 @MicroApi(comment = "商品订单 - 购买", type = "read", version = "v0.0.15")
 public class MixOrder_Buy_Api {
+
+    private static boolean hasBuyLimit(User user, Goods goods) throws MicroOssException {
+        GoodsBuyLimit goodsBuyLimit = MicroOss.queryObject(GoodsBuyLimit.class, Where.and(Condition.build("goodsId=", goods.getId()), Condition.build("userId=", user.getId())));
+        if (goodsBuyLimit == null) {
+            return false;
+        }
+        int buyCount = MicroOss.queryCount(MixOrder.class, Where.and(Condition.build("goodsId=", goods.getId()), Condition.build("userId=", user.getId())));
+        return buyCount >= goodsBuyLimit.getAmount();
+    }
 
     private static void core(Req req, Response resp) throws Exception {
         User user = Fn.queryUserByToken(req.getToken());
@@ -32,6 +44,9 @@ public class MixOrder_Buy_Api {
             throw new MicroApiPassthroughException(ErrorCodeEnum.goods_not_exist);
         }
         if (goods.getStock() <= 0) {
+            throw new MicroApiPassthroughException(ErrorCodeEnum.low_stock);
+        }
+        if (hasBuyLimit(user, goods)) {
             throw new MicroApiPassthroughException(ErrorCodeEnum.low_stock);
         }
         int orderAmount = getOrderAmount(user, goods);
@@ -78,17 +93,17 @@ public class MixOrder_Buy_Api {
     }
 
     private static int getOrderAmount(User user, Goods goods) {
-        switch(user.getLevel()) {
-            case 0:
-                return goods.getPrice();
-            case 1:
-                return goods.getPriceLevel1();
-            case 2:
-                return goods.getPriceLevel2();
-            case 3:
-                return goods.getPriceLevel3();
-            default:
-                return goods.getPrice();
+        switch (user.getLevel()) {
+        case 0:
+            return goods.getPrice();
+        case 1:
+            return goods.getPriceLevel1();
+        case 2:
+            return goods.getPriceLevel2();
+        case 3:
+            return goods.getPriceLevel3();
+        default:
+            return goods.getPrice();
         }
     }
 
@@ -104,9 +119,7 @@ public class MixOrder_Buy_Api {
 
     public static class Req extends Request {
 
-        @Comment(value = "Token")
-        @Required(value = true)
-        private String token;
+        @Comment(value = "Token") @Required(value = true) private String token;
 
         public String getToken() {
             return token;
@@ -116,9 +129,7 @@ public class MixOrder_Buy_Api {
             this.token = token;
         }
 
-        @Comment(value = "商品ID")
-        @Required(value = true)
-        private String goodsId;
+        @Comment(value = "商品ID") @Required(value = true) private String goodsId;
 
         public String getGoodsId() {
             return goodsId;
@@ -128,9 +139,7 @@ public class MixOrder_Buy_Api {
             this.goodsId = goodsId;
         }
 
-        @Comment(value = "订单备注(JsonObject)")
-        @Required(value = true)
-        private String comment;
+        @Comment(value = "订单备注(JsonObject)") @Required(value = true) private String comment;
 
         public String getComment() {
             return comment;
