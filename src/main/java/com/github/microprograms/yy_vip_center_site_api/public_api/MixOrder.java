@@ -4,7 +4,7 @@ import com.github.microprograms.micro_relational_data_model_runtime.MicroRelatio
 import com.github.microprograms.micro_relational_data_model_runtime.Comment;
 import com.github.microprograms.micro_relational_data_model_runtime.Required;
 
-@MicroRelationalDataModel(version = "v0.0.15")
+@MicroRelationalDataModel(version = "v0.0.18")
 public class MixOrder {
 
     @Comment(value = "订单号")
@@ -281,6 +281,42 @@ public class MixOrder {
 
     public void setRefundRequestRejectReason(String refundRequestRejectReason) {
         this.refundRequestRejectReason = refundRequestRejectReason;
+    }
+
+    @Comment(value = "是否为卡密订单(0否1是)")
+    @Required(value = true)
+    private Integer isTicketGoodsOrder = 0;
+
+    public Integer getIsTicketGoodsOrder() {
+        return isTicketGoodsOrder;
+    }
+
+    public void setIsTicketGoodsOrder(Integer isTicketGoodsOrder) {
+        this.isTicketGoodsOrder = isTicketGoodsOrder;
+    }
+
+    @Comment(value = "卡密订单 - 购买数量")
+    @Required(value = true)
+    private Integer ticketGoodsOrder_buyAmount = 0;
+
+    public Integer getTicketGoodsOrder_buyAmount() {
+        return ticketGoodsOrder_buyAmount;
+    }
+
+    public void setTicketGoodsOrder_buyAmount(Integer ticketGoodsOrder_buyAmount) {
+        this.ticketGoodsOrder_buyAmount = ticketGoodsOrder_buyAmount;
+    }
+
+    @Comment(value = "卡密订单 - 卡密列表(JsonArray)")
+    @Required(value = true)
+    private String ticketGoodsOrder_tickets = "";
+
+    public String getTicketGoodsOrder_tickets() {
+        return ticketGoodsOrder_tickets;
+    }
+
+    public void setTicketGoodsOrder_tickets(String ticketGoodsOrder_tickets) {
+        this.ticketGoodsOrder_tickets = ticketGoodsOrder_tickets;
     }
 
     @Comment(value = "上次修改时间")

@@ -5,9 +5,9 @@ import com.github.microprograms.micro_relational_data_model_runtime.Comment;
 import com.github.microprograms.micro_relational_data_model_runtime.Required;
 
 @MicroRelationalDataModel(version = "v0.0.18")
-public class Goods {
+public class TicketGoods {
 
-    @Comment(value = "商品ID")
+    @Comment(value = "卡密商品ID")
     @Required(value = true)
     private String id = "";
 
@@ -17,30 +17,6 @@ public class Goods {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    @Comment(value = "商品分类ID")
-    @Required(value = true)
-    private String categoryId = "";
-
-    public String getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    @Comment(value = "商品分类名称")
-    @Required(value = true)
-    private String categoryName = "";
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 
     @Comment(value = "排序号(小的在前)")
@@ -139,18 +115,6 @@ public class Goods {
         this.priceLevel3 = priceLevel3;
     }
 
-    @Comment(value = "商品库存")
-    @Required(value = true)
-    private Integer stock = 0;
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public void setStock(Integer stock) {
-        this.stock = stock;
-    }
-
     @Comment(value = "创建时间")
     @Required(value = true)
     private Long dtCreate = 0L;
@@ -233,18 +197,6 @@ public class Goods {
 
     public void setSoldOutOperatorLoginName(String soldOutOperatorLoginName) {
         this.soldOutOperatorLoginName = soldOutOperatorLoginName;
-    }
-
-    @Comment(value = "备注模板(0基础模板,1第一套,2第二套,3第三套)")
-    @Required(value = true)
-    private Integer commentTemplate = 0;
-
-    public Integer getCommentTemplate() {
-        return commentTemplate;
-    }
-
-    public void setCommentTemplate(Integer commentTemplate) {
-        this.commentTemplate = commentTemplate;
     }
 
     @Comment(value = "上次修改时间")

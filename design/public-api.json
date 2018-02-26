@@ -258,6 +258,74 @@
 			"type": "read"
 		},
 		{
+			"comment": "卡密商品 - 查询列表",
+			"javaClassName": "TicketGoods_QueryList_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "页码(从0开始)",
+						"example": "example",
+						"javaType": "Integer",
+						"name": "pageIndex",
+						"required": true
+					},
+					{
+						"comment": "页大小",
+						"example": "example",
+						"javaType": "Integer",
+						"name": "pageSize",
+						"required": true
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "卡密商品列表",
+						"example": "example",
+						"javaType": "java.util.List<TicketGoods>",
+						"name": "data",
+						"required": true
+					},
+					{
+						"comment": "分页",
+						"example": "example",
+						"javaType": "com.github.microprograms.micro_oss_core.model.dml.PagerResponse",
+						"name": "pager",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "卡密商品 - 查询详情",
+			"javaClassName": "TicketGoods_QueryDetail_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "卡密商品ID",
+						"example": "example",
+						"javaType": "String",
+						"name": "ticketGoodsId",
+						"required": true
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "卡密商品详情",
+						"example": "example",
+						"javaType": "TicketGoods",
+						"name": "data",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
 			"comment": "商品订单 - 购买",
 			"javaClassName": "MixOrder_Buy_Api",
 			"requestDefinition": {
@@ -281,6 +349,36 @@
 						"example": "example",
 						"javaType": "String",
 						"name": "comment",
+						"required": true
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "商品订单 - 购买卡密",
+			"javaClassName": "MixOrder_BuyTicketGoods_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					},
+					{
+						"comment": "卡密商品ID",
+						"example": "example",
+						"javaType": "String",
+						"name": "ticketGoodsId",
+						"required": true
+					},
+					{
+						"comment": "购买数量",
+						"example": 1,
+						"javaType": "Integer",
+						"name": "amount",
 						"required": true
 					}
 				]
@@ -404,6 +502,41 @@
 						"name": "refundRequestComment",
 						"primaryKey": 0,
 						"required": false
+					}
+				]
+			},
+			"type": "read"
+		},
+		{
+			"comment": "商品订单 - 提取卡密",
+			"javaClassName": "MixOrder_QueryTickets_Api",
+			"requestDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "Token",
+						"example": "example",
+						"javaType": "String",
+						"name": "token",
+						"required": true
+					},
+					{
+						"comment": "商品订单ID",
+						"example": "example",
+						"javaType": "String",
+						"name": "orderId",
+						"primaryKey": 0,
+						"required": true
+					}
+				]
+			},
+			"responseDefinition": {
+				"fieldDefinitions": [
+					{
+						"comment": "卡密列表",
+						"example": "example",
+						"javaType": "java.util.List<String>",
+						"name": "data",
+						"required": true
 					}
 				]
 			},
@@ -562,5 +695,5 @@
 		"apiToken": "6605a1cc72525cf8bdc21b2785db02fd899924958",
 		"url": "https://www.showdoc.cc/server/api/item/updateByApi"
 	},
-	"version": "v0.0.15"
+	"version": "v0.0.18"
 }

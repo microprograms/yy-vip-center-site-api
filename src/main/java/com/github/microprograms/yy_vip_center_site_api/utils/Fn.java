@@ -18,6 +18,7 @@ import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.micro_oss_mysql.Config;
 import com.github.microprograms.micro_oss_mysql.MysqlMicroOssProvider;
 import com.github.microprograms.yy_vip_center_site_api.public_api.Goods;
+import com.github.microprograms.yy_vip_center_site_api.public_api.TicketGoods;
 import com.github.microprograms.yy_vip_center_site_api.public_api.User;
 import com.typesafe.config.ConfigFactory;
 
@@ -28,6 +29,10 @@ public class Fn {
         Thread.sleep(1);
         Date date = new Date();
         return new SimpleDateFormat("yyyyMMddHHmmss").format(date) + date.getTime();
+    }
+
+    public static TicketGoods queryTicketGoodsById(String ticketGoodsId) throws MicroOssException {
+        return MicroOss.queryObject(TicketGoods.class, Condition.build("id=", ticketGoodsId));
     }
 
     public static Goods queryGoodsById(String goodsId) throws MicroOssException {

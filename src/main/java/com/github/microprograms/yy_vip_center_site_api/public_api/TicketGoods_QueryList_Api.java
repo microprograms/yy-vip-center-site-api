@@ -13,13 +13,12 @@ import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.micro_oss_core.model.dml.PagerRequest;
 import com.github.microprograms.micro_oss_core.model.dml.PagerResponse;
 import com.github.microprograms.micro_oss_core.model.dml.Sort;
-import com.github.microprograms.micro_oss_core.model.dml.Where;
 
-@MicroApi(comment = "商品 - 查询列表", type = "read", version = "v0.0.18")
-public class Goods_QueryList_Api {
+@MicroApi(comment = "卡密商品 - 查询列表", type = "read", version = "v0.0.18")
+public class TicketGoods_QueryList_Api {
 
     private static Condition buildFinalCondition(Req req) {
-        return Where.and(Condition.build("isSoldOut=", 0), Condition.build("categoryId=", req.getCategoryId()));
+        return Condition.build("isSoldOut=", 0);
     }
 
     private static List<Sort> buildSort(Req req) {
@@ -30,15 +29,14 @@ public class Goods_QueryList_Api {
         PagerRequest pager = new PagerRequest(req.getPageIndex(), req.getPageSize());
         Condition finalCondition = buildFinalCondition(req);
         List<Sort> sorts = buildSort(req);
-        resp.setData(MicroOss.queryAll(Goods.class, finalCondition, sorts, pager));
-        resp.setPager(new PagerResponse(pager, MicroOss.queryCount(Goods.class, finalCondition)));
+        resp.setData(MicroOss.queryAll(TicketGoods.class, finalCondition, sorts, pager));
+        resp.setPager(new PagerResponse(pager, MicroOss.queryCount(TicketGoods.class, finalCondition)));
     }
 
     public static Response execute(Request request) throws Exception {
         Req req = (Req) request;
         MicroApiUtils.throwExceptionIfBlank(req.getPageIndex(), "pageIndex");
         MicroApiUtils.throwExceptionIfBlank(req.getPageSize(), "pageSize");
-        MicroApiUtils.throwExceptionIfBlank(req.getCategoryId(), "categoryId");
         Resp resp = new Resp();
         core(req, resp);
         return resp;
@@ -69,31 +67,19 @@ public class Goods_QueryList_Api {
         public void setPageSize(Integer pageSize) {
             this.pageSize = pageSize;
         }
-
-        @Comment(value = "商品类别ID")
-        @Required(value = true)
-        private String categoryId;
-
-        public String getCategoryId() {
-            return categoryId;
-        }
-
-        public void setCategoryId(String categoryId) {
-            this.categoryId = categoryId;
-        }
     }
 
     public static class Resp extends Response {
 
-        @Comment(value = "商品列表")
+        @Comment(value = "卡密商品列表")
         @Required(value = true)
-        private java.util.List<Goods> data;
+        private java.util.List<TicketGoods> data;
 
-        public java.util.List<Goods> getData() {
+        public java.util.List<TicketGoods> getData() {
             return data;
         }
 
-        public void setData(java.util.List<Goods> data) {
+        public void setData(java.util.List<TicketGoods> data) {
             this.data = data;
         }
 

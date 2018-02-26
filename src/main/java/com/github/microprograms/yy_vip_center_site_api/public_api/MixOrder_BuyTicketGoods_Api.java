@@ -3,6 +3,7 @@ package com.github.microprograms.yy_vip_center_site_api.public_api;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 import com.alibaba.fastjson.JSON;
 import com.github.microprograms.micro_api_runtime.annotation.MicroApi;
 import com.github.microprograms.micro_api_runtime.exception.MicroApiPassthroughException;
@@ -17,41 +18,31 @@ import com.github.microprograms.micro_oss_core.exception.MicroOssException;
 import com.github.microprograms.micro_oss_core.model.Field;
 import com.github.microprograms.micro_oss_core.model.dml.Condition;
 import com.github.microprograms.micro_oss_core.model.dml.InsertCommand;
+import com.github.microprograms.micro_oss_core.model.dml.PagerRequest;
 import com.github.microprograms.micro_oss_core.model.dml.UpdateCommand;
 import com.github.microprograms.micro_oss_core.model.dml.Where;
 import com.github.microprograms.yy_vip_center_site_api.utils.Fn;
 
-@MicroApi(comment = "商品订单 - 购买", type = "read", version = "v0.0.18")
-public class MixOrder_Buy_Api {
-
-    private static boolean hasBuyLimit(User user, Goods goods) throws MicroOssException {
-        GoodsBuyLimit goodsBuyLimit = MicroOss.queryObject(GoodsBuyLimit.class, Where.and(Condition.build("goodsId=", goods.getId()), Condition.build("userId=", user.getId())));
-        if (goodsBuyLimit == null) {
-            return false;
-        }
-        int buyCount = MicroOss.queryCount(MixOrder.class, Where.and(Condition.build("goodsId=", goods.getId()), Condition.build("userId=", user.getId())));
-        return buyCount >= goodsBuyLimit.getAmount();
-    }
+@MicroApi(comment = "商品订单 - 购买卡密", type = "read", version = "v0.0.18")
+public class MixOrder_BuyTicketGoods_Api {
 
     private static synchronized void core(Req req, Response resp) throws Exception {
         User user = Fn.queryUserByToken(req.getToken());
         if (user == null) {
             throw new MicroApiPassthroughException(ErrorCodeEnum.invalid_token);
         }
-        Goods goods = Fn.queryGoodsById(req.getGoodsId());
-        if (goods == null) {
+        TicketGoods ticketGoods = Fn.queryTicketGoodsById(req.getTicketGoodsId());
+        if (ticketGoods == null) {
             throw new MicroApiPassthroughException(ErrorCodeEnum.goods_not_exist);
         }
-        if (goods.getIsSoldOut() == 1) {
+        if (ticketGoods.getIsSoldOut() == 1) {
             throw new MicroApiPassthroughException(ErrorCodeEnum.goods_not_exist);
         }
-        if (goods.getStock() <= 0) {
+        int buyAmount = req.getAmount();
+        if (getStock(ticketGoods) < buyAmount) {
             throw new MicroApiPassthroughException(ErrorCodeEnum.low_stock);
         }
-        if (hasBuyLimit(user, goods)) {
-            throw new MicroApiPassthroughException(ErrorCodeEnum.low_stock);
-        }
-        int orderAmount = getOrderAmount(user, goods);
+        int orderAmount = getPrice(user, ticketGoods) * buyAmount;
         int oldWalletAmount = user.getWalletAmount();
         int newWalletAmount = oldWalletAmount - orderAmount;
         if (newWalletAmount < 0) {
@@ -59,19 +50,27 @@ public class MixOrder_Buy_Api {
         }
         try (Transaction transaction = MicroOss.beginTransaction()) {
             String mixOrderId = Fn.genNewMixOrderId();
+            // 卡密
+            List<Ticket> tickets = getUsableTicketList(ticketGoods, buyAmount);
+            for (Ticket ticket : tickets) {
+                List<Field> ticketFields = new ArrayList<>();
+                ticketFields.add(new Field("isSoldOut", 1));
+                ticketFields.add(new Field("dtSoldOut", System.currentTimeMillis()));
+                ticketFields.add(new Field("ticketGoodsOrderId", mixOrderId));
+                transaction.updateObject(new UpdateCommand(Ticket.class.getSimpleName(), ticketFields, Condition.build("id=", ticket.getId())));
+            }
             // 订单
             MixOrder mixOrder = new MixOrder();
             mixOrder.setId(mixOrderId);
             mixOrder.setUserId(user.getId());
             mixOrder.setUserNickname(user.getNickname());
+            mixOrder.setIsTicketGoodsOrder(1);
+            mixOrder.setTicketGoodsOrder_buyAmount(buyAmount);
+            mixOrder.setTicketGoodsOrder_tickets(JSON.toJSONString(tickets.stream().map(x -> x.getTicket()).collect(Collectors.toList())));
             mixOrder.setOrderAmount(orderAmount);
-            mixOrder.setGoodsId(goods.getId());
-            mixOrder.setGoodsName(goods.getName());
-            mixOrder.setGoodsCategoryId(goods.getCategoryId());
-            mixOrder.setGoodsCategoryName(goods.getCategoryName());
-            mixOrder.setGoodsCommentTemplate(goods.getCommentTemplate());
-            mixOrder.setGoodsDetail(JSON.toJSONString(goods));
-            mixOrder.setComment(req.getComment());
+            mixOrder.setGoodsId(ticketGoods.getId());
+            mixOrder.setGoodsName(ticketGoods.getName());
+            mixOrder.setGoodsDetail(JSON.toJSONString(ticketGoods));
             mixOrder.setDtCreate(System.currentTimeMillis());
             transaction.insertObject(new InsertCommand(MicroOss.buildEntity(mixOrder)));
             // 用户
@@ -89,34 +88,44 @@ public class MixOrder_Buy_Api {
             walletBill.setAmount(orderAmount);
             walletBill.setOldWalletAmount(oldWalletAmount);
             walletBill.setNewWalletAmount(newWalletAmount);
-            walletBill.setOutOrderGoodsId(goods.getId());
-            walletBill.setOutOrderGoodsName(goods.getName());
+            walletBill.setOutOrderGoodsId(ticketGoods.getId());
+            walletBill.setOutOrderGoodsName(ticketGoods.getName());
             walletBill.setOutOrderId(mixOrderId);
             transaction.insertObject(new InsertCommand(MicroOss.buildEntity(walletBill)));
             transaction.commit();
         }
     }
 
-    private static int getOrderAmount(User user, Goods goods) {
+    private static int getStock(TicketGoods ticketGoods) throws MicroOssException {
+        return MicroOss.queryCount(Ticket.class, Where.and(Condition.build("ticketGoodsId=", ticketGoods.getId()), Condition.build("isSoldOut=", 0)));
+    }
+
+    private static int getPrice(User user, TicketGoods ticketGoods) {
         switch(user.getLevel()) {
             case 0:
-                return goods.getPrice();
+                return ticketGoods.getPrice();
             case 1:
-                return goods.getPriceLevel1();
+                return ticketGoods.getPriceLevel1();
             case 2:
-                return goods.getPriceLevel2();
+                return ticketGoods.getPriceLevel2();
             case 3:
-                return goods.getPriceLevel3();
+                return ticketGoods.getPriceLevel3();
             default:
-                return goods.getPrice();
+                return ticketGoods.getPrice();
         }
+    }
+
+    private static List<Ticket> getUsableTicketList(TicketGoods ticketGoods, int count) throws MicroOssException {
+        PagerRequest pager = new PagerRequest(0, count);
+        Condition finalCondition = Where.and(Condition.build("ticketGoodsId=", ticketGoods.getId()), Condition.build("isSoldOut=", 0));
+        return MicroOss.queryAll(Ticket.class, finalCondition, null, pager);
     }
 
     public static Response execute(Request request) throws Exception {
         Req req = (Req) request;
         MicroApiUtils.throwExceptionIfBlank(req.getToken(), "token");
-        MicroApiUtils.throwExceptionIfBlank(req.getGoodsId(), "goodsId");
-        MicroApiUtils.throwExceptionIfBlank(req.getComment(), "comment");
+        MicroApiUtils.throwExceptionIfBlank(req.getTicketGoodsId(), "ticketGoodsId");
+        MicroApiUtils.throwExceptionIfBlank(req.getAmount(), "amount");
         Response resp = new Response();
         core(req, resp);
         return resp;
@@ -136,28 +145,28 @@ public class MixOrder_Buy_Api {
             this.token = token;
         }
 
-        @Comment(value = "商品ID")
+        @Comment(value = "卡密商品ID")
         @Required(value = true)
-        private String goodsId;
+        private String ticketGoodsId;
 
-        public String getGoodsId() {
-            return goodsId;
+        public String getTicketGoodsId() {
+            return ticketGoodsId;
         }
 
-        public void setGoodsId(String goodsId) {
-            this.goodsId = goodsId;
+        public void setTicketGoodsId(String ticketGoodsId) {
+            this.ticketGoodsId = ticketGoodsId;
         }
 
-        @Comment(value = "订单备注(JsonObject)")
+        @Comment(value = "购买数量")
         @Required(value = true)
-        private String comment;
+        private Integer amount;
 
-        public String getComment() {
-            return comment;
+        public Integer getAmount() {
+            return amount;
         }
 
-        public void setComment(String comment) {
-            this.comment = comment;
+        public void setAmount(Integer amount) {
+            this.amount = amount;
         }
     }
 }
